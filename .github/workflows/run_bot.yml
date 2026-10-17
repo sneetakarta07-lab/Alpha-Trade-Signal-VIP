@@ -1,0 +1,25 @@
+name: VIP Signal Bot Auto Runner
+
+on:
+  schedule:
+    # ہر 3 گھنٹے بعد انٹرنیٹ پر خودکار چلے گا
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # جب آپ کا دل چاہے مینوئل رن کرنے کا بٹن
+
+jobs:
+  post-signals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Libraries
+        run: pip install -r requirements.txt
+
+      - name: Run Bot
+        run: python signal_bot.py
