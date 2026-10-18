@@ -1,0 +1,22 @@
+{
+    "BITCOIN (BTC/USD)": {
+        "ticker": "BTC-USD",
+        "signal_type": "\ud83d\udd34 HIGH-PROBABILITY SELL",
+        "entry": 81584.7734375,
+        "tp1": 81190.01143973214,
+        "tp2": 80795.24944196429,
+        "sl": 81979.53543526786,
+        "tp1_hit": false,
+        "time": "2026-10-18 07:41:11.430647"
+    },
+    "ETHEREUM (ETH/USD)": {
+        "ticker": "ETH-USD",
+        "signal_type": "\ud83d\udd34 HIGH-PROBABILITY SELL",
+        "entry": 2407.360107421875,
+        "tp1": 2385.566135951451,
+        "tp2": 2363.7721644810267,
+        "sl": 2429.154078892299,
+        "tp1_hit": false,
+        "time": "2026-10-18 07:41:12.014064"
+    }
+}
