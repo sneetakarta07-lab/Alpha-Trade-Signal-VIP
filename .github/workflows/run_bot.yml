@@ -2,8 +2,12 @@ name: VIP Signal Bot Auto Runner
 
 on:
   schedule:
-    - cron: '0 */3 * * *'
+    # ہر 30 منٹ بعد چیک کرے گا تاکہ TP اور SL کے لائیو رزلٹس فوراً چینل میں پوسٹ ہوں
+    - cron: '*/30 * * * *'
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   post-signals:
@@ -22,3 +26,11 @@ jobs:
 
       - name: Run Bot
         run: python signal_bot.py
+
+      - name: Commit and Push Trade State
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add active_trades.json || true
+          git commit -m "Update active trades state [skip ci]" || true
+          git push || true
