@@ -7,7 +7,8 @@ import pandas as pd
 import numpy as np
 
 # ----------------- CONFIGURATION -----------------
-TELEGRAM_BOT_TOKEN = "8547996769:AAGBptEXNOsXvnzfQVrOxhTYjnhIkc4YZ0Q"
+# ٹوکن محفوظ طریقے سے گٹ ہب سیکرٹ سے آئے گا
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHANNEL_CHAT_ID = "@tradewiselynow"
 
 DERIV_REF_LINK = "https://t.deriv.link?t=NEGTK7BHFWUG"
@@ -61,6 +62,9 @@ def calculate_atr(df, window=14):
     return atr
 
 def send_telegram_message(text):
+    if not TELEGRAM_BOT_TOKEN:
+        print("Error: TELEGRAM_BOT_TOKEN environment variable is missing.")
+        return {}
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
     payload = {
         "chat_id": CHANNEL_CHAT_ID,
@@ -72,7 +76,7 @@ def send_telegram_message(text):
     return response.json()
 
 def check_active_trades():
-    """پرانی ایکٹو ٹریڈز کے TP یا SL ہٹ ہونے کی تصدیق اور لائیو الرٹ"""
+    """ایکٹو ٹریڈز کے TP یا SL ہٹ ہونے کی تصدیق اور لائیو الرٹ"""
     trades = load_trades()
     if not trades:
         return
@@ -115,7 +119,7 @@ def check_active_trades():
                     pips = abs(entry - tp1)
                     trade["tp1_hit"] = True
                     hit_message = f"🎯 *TARGET 1 HIT!* ✅\nAsset: *{name}*\nTake Profit 1 Hit at `{current_price:.2f}`\nGain: `+{pips:.2f}`\n\nSecure 50% profit & move Stop Loss to Entry (Break-Even)!"
-                elif current_price >= sl:
+                elif current_price <= sl:
                     hit_message = f"🛑 *STOP LOSS HIT*\nAsset: *{name}*\nClosed at `{current_price:.2f}`\nRisk strictly managed as per plan."
 
             if hit_message:
@@ -146,12 +150,12 @@ def analyze_and_signal():
     is_weekend = today_weekday in [5, 6]
     active_pairs = WEEKEND_PAIRS if is_weekend else WEEKDAY_PAIRS
 
-    # 1. پہلے ایکٹو ٹریڈز کے TP اور SL کا معائنہ
+    # 1. پہلے ایکٹو ٹریڈز کے رزلٹس چیک کریں
     check_active_trades()
 
     trades = load_trades()
 
-    # 2. ہائی ایکوریسی سگنل فلٹرنگ
+    # 2. ہائی ایکوریسی سگنلز اسکین کریں
     for name, ticker in active_pairs.items():
         if name in trades:
             continue
@@ -164,15 +168,13 @@ def analyze_and_signal():
             close_prices = df['Close'].squeeze()
             current_price = float(close_prices.iloc[-1])
 
-            # فلٹر 1: ڈبل موونگ ایوریج (50 EMA & 200 EMA)
+            # فلٹرز: ڈبل موونگ ایوریج، مومینٹم اور والٹیلیٹی
             ema_50 = float(close_prices.ewm(span=50, adjust=False).mean().iloc[-1])
             ema_200 = float(close_prices.ewm(span=200, adjust=False).mean().iloc[-1])
 
-            # فلٹر 2: مومینٹم (RSI 14)
             rsi_series = calculate_rsi(close_prices)
             current_rsi = float(rsi_series.iloc[-1])
 
-            # فلٹر 3: والٹیلیٹی (ATR برائے ڈائنامک رسک)
             atr_series = calculate_atr(df)
             current_atr = float(atr_series.iloc[-1])
 
@@ -184,16 +186,14 @@ def analyze_and_signal():
             tp1 = 0.0
             tp2 = 0.0
 
-            # اعلیٰ معیار کا بائے سگنل:
-            # قیمت 200 EMA سے اوپر ہو + 50 EMA ٹرینڈ کو سپورٹ کرے + RSI پل بیک میں ہو
+            # ہائی ایکوریسی بائے لاجک
             if current_price > ema_200 and ema_50 > ema_200 and (40 <= current_rsi <= 52):
                 signal_type = "🟢 HIGH-PROBABILITY BUY"
                 sl = current_price - (current_atr * 1.5)
-                tp1 = current_price + (current_atr * 1.5)  # 1:1 TP1 (ہائی ہٹ ریٹ)
-                tp2 = current_price + (current_atr * 3.0)  # 1:2 TP2 (میکسمم پرافٹ)
+                tp1 = current_price + (current_atr * 1.5)
+                tp2 = current_price + (current_atr * 3.0)
 
-            # اعلیٰ معیار کا سیل سگنل:
-            # قیمت 200 EMA سے نیچے ہو + 50 EMA ڈاون ٹرینڈ میں ہو + RSI پل بیک میں ہو
+            # ہائی ایکوریسی سیل لاجک
             elif current_price < ema_200 and ema_50 < ema_200 and (48 <= current_rsi <= 60):
                 signal_type = "🔴 HIGH-PROBABILITY SELL"
                 sl = current_price + (current_atr * 1.5)
@@ -220,8 +220,8 @@ Asset: *{name}*
 Setup: *{signal_type}*
 Entry Price: `{current_price:.2f}`
 
-🎯 *Take Profit 1:* `{tp1:.2f}` (Safe)
-🎯 *Take Profit 2:* `{tp2:.2f}` (Extended)
+🎯 *Take Profit 1:* `{tp1:.2f}` (Safe Target)
+🎯 *Take Profit 2:* `{tp2:.2f}` (Extended Target)
 🛑 *Stop Loss:* `{sl:.2f}` (ATR Protected)
 
 ⚡ *Risk / Reward:* `1:2`
