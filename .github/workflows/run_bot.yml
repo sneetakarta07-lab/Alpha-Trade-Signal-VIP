@@ -2,7 +2,7 @@ name: VIP Signal Bot Auto Runner
 
 on:
   schedule:
-    # ہر 30 منٹ بعد چیک کرے گا تاکہ TP اور SL کے لائیو رزلٹس فوراً چینل میں پوسٹ ہوں
+    # ہر 30 منٹ بعد مارکیٹ چیک کرے گا
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
@@ -25,6 +25,8 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python signal_bot.py
 
       - name: Commit and Push Trade State
