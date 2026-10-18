@@ -1,12 +1,1 @@
-{
-    "ETHEREUM (ETH/USD)": {
-        "ticker": "ETH-USD",
-        "signal_type": "\ud83d\udd34 HIGH-PROBABILITY SELL",
-        "entry": 2417.860107421875,
-        "tp1": 2395.7469308035716,
-        "tp2": 2373.6337541852677,
-        "sl": 2439.9732840401784,
-        "tp1_hit": false,
-        "time": "2026-10-18 09:17:00.463806"
-    }
-}
+{}
