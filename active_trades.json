@@ -1,12 +1,12 @@
 {
-    "BITCOIN (BTC/USD)": {
-        "ticker": "BTC-USD",
-        "signal_type": "\ud83d\udd34 HIGH-PROBABILITY SELL",
-        "entry": 81943.1171875,
-        "tp1": 81434.37109375,
-        "tp2": 80925.625,
-        "sl": 82451.86328125,
+    "EUR/USD": {
+        "ticker": "EURUSD=X",
+        "signal_type": "\ud83d\udfe2 HIGH-PROBABILITY BUY",
+        "entry": 1.1233429908752441,
+        "tp1": 1.1251558576311385,
+        "tp2": 1.1269687243870325,
+        "sl": 1.1215301241193498,
         "tp1_hit": false,
-        "time": "2026-10-18 23:33:19.958710"
+        "time": "2026-10-19 03:51:27.981195"
     }
 }
