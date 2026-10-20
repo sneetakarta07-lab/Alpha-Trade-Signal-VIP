@@ -1,23 +1,14 @@
 {
     "version": 2,
-    "active": {
-        "GBP/USD": {
-            "ticker": "GBPUSD=X",
-            "signal_type": "\ud83d\udfe2 SNIPER BUY",
-            "entry": 1.3327823877334595,
-            "tp1": 1.33418707075615,
-            "tp2": 1.3358471506920573,
-            "sl": 1.3297176247748617,
-            "tp1_hit": false,
-            "time": "2026-10-19T09:17:41.550561+00:00"
-        }
+    "active": {},
+    "daily_count": 0,
+    "date": "2026-10-20",
+    "cooldowns": {
+        "GBP/USD": "2026-10-20T00:33:06.235939+00:00"
     },
-    "daily_count": 1,
-    "date": "2026-10-19",
-    "cooldowns": {},
     "stats": {
         "wins": 0,
-        "losses": 0,
+        "losses": 1,
         "be": 0
     }
 }
