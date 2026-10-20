@@ -1,7 +1,28 @@
 {
     "version": 2,
-    "active": {},
-    "daily_count": 0,
+    "active": {
+        "GOLD (XAU/USD)": {
+            "ticker": "GC=F",
+            "signal_type": "\ud83d\udd34 SNIPER SELL",
+            "entry": 4139.2998046875,
+            "tp1": 4124.260722298507,
+            "tp2": 4106.487261293333,
+            "sl": 4178.317875613976,
+            "tp1_hit": false,
+            "time": "2026-10-20T19:54:36.111972+00:00"
+        },
+        "EUR/USD": {
+            "ticker": "EURUSD=X",
+            "signal_type": "\ud83d\udfe2 SNIPER BUY",
+            "entry": 1.123974323272705,
+            "tp1": 1.1252061953066284,
+            "tp2": 1.1266620440739923,
+            "sl": 1.1205449621352623,
+            "tp1_hit": false,
+            "time": "2026-10-20T19:54:36.111972+00:00"
+        }
+    },
+    "daily_count": 2,
     "date": "2026-10-20",
     "cooldowns": {
         "GBP/USD": "2026-10-20T00:33:06.235939+00:00"
