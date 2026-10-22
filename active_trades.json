@@ -1,7 +1,18 @@
 {
     "version": 2,
-    "active": {},
-    "daily_count": 0,
+    "active": {
+        "USD/JPY": {
+            "ticker": "JPY=X",
+            "signal_type": "\ud83d\udd34 SNIPER SELL",
+            "entry": 157.18800354003906,
+            "tp1": 156.91516987521118,
+            "tp2": 156.5927300895055,
+            "sl": 157.82400105930037,
+            "tp1_hit": false,
+            "time": "2026-10-22T15:34:04.673626+00:00"
+        }
+    },
+    "daily_count": 1,
     "date": "2026-10-22",
     "cooldowns": {
         "GBP/USD": "2026-10-20T00:33:06.235939+00:00",
