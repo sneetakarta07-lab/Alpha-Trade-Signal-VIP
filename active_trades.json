@@ -1,8 +1,29 @@
 {
     "version": 2,
-    "active": {},
-    "daily_count": 1,
-    "date": "2026-10-22",
+    "active": {
+        "BITCOIN (BTC/USD)": {
+            "ticker": "BTC-USD",
+            "signal_type": "\ud83d\udd34 SNIPER SELL",
+            "entry": 80559.03125,
+            "tp1": 80184.30621418051,
+            "tp2": 79741.44935366658,
+            "sl": 81484.15696836807,
+            "tp1_hit": false,
+            "time": "2026-10-24T08:49:07.567738+00:00"
+        },
+        "ETHEREUM (ETH/USD)": {
+            "ticker": "ETH-USD",
+            "signal_type": "\ud83d\udd34 SNIPER SELL",
+            "entry": 2365.550048828125,
+            "tp1": 2350.174129241284,
+            "tp2": 2332.0025879113805,
+            "sl": 2406.2245076475774,
+            "tp1_hit": false,
+            "time": "2026-10-24T08:49:07.567738+00:00"
+        }
+    },
+    "daily_count": 2,
+    "date": "2026-10-24",
     "cooldowns": {
         "GBP/USD": "2026-10-20T00:33:06.235939+00:00",
         "GOLD (XAU/USD)": "2026-10-21T07:16:26.895448+00:00",
