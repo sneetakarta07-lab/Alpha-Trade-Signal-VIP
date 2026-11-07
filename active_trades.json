@@ -1,8 +1,19 @@
 {
     "version": 2,
-    "active": {},
+    "active": {
+        "BITCOIN (BTC/USD)": {
+            "ticker": "BTC-USD",
+            "signal_type": "\ud83d\udd34 SNIPER SELL",
+            "entry": 75809.4765625,
+            "tp1": 75321.06733343947,
+            "tp2": 74743.85642636793,
+            "sl": 76875.09669863207,
+            "tp1_hit": false,
+            "time": "2026-11-07T00:42:11.163415+00:00"
+        }
+    },
     "daily_count": 1,
-    "date": "2026-11-03",
+    "date": "2026-11-07",
     "cooldowns": {
         "GBP/USD": "2026-10-20T00:33:06.235939+00:00",
         "GOLD (XAU/USD)": "2026-11-03T20:50:12.410325+00:00",
